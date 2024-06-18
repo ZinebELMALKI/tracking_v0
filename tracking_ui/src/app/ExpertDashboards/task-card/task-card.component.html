@@ -1,0 +1,18 @@
+<div class="task-card">
+    <h3>{{title}}</h3>
+    <p class="description">{{description}}</p>
+    <div class="tags">
+      <span *ngFor="let tag of tags" class="tag">{{tag}}</span>
+    </div>
+    <div class="info">
+      <div class="left">
+        <!-- <img src="assets/icon-comments.png" alt="Comments">
+        <span>{{comments}}</span> -->
+        <!-- <img src="assets/icon-files.png" alt="Files">
+        <span>{{files}}</span> -->
+      </div>
+      <div class="right">
+        <span>{{dueDate}}</span>
+      </div>
+    </div>
+  </div>  

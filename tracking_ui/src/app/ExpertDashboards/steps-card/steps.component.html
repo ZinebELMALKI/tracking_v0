@@ -1,0 +1,31 @@
+<h2>Steps</h2>
+<div *ngFor="let steps of stepsList" class="progress-card" (click)="navigateToTask()">
+<div class="card">
+  <div class="card-content">
+      <img src="assets/java-banner.png" alt="Java Course Banner" class="course-banner">
+      <div class="course-details">
+        <h3>{{steps.title}}</h3>
+        <p>{{steps.description}}</p>
+        <div class="progress-info">
+          <div class="progress-bar">
+            <div class="progress" style="width: 90%;"></div>
+          </div>
+          <span class="progress-percent">{{steps.stepProcess}}</span>
+        </div>
+        <p class="duration">{{steps.duration}} Hour</p>
+      </div>
+      <!-- <div class="course-status">
+          <p><strong>Step En cours:</strong> Creation Base de donnée</p>
+          <p>20 Apprenant</p>
+          <div class="avatars">
+            <img src="assets/avatar1.png" alt="Avatar 1">
+            <img src="assets/avatar2.png" alt="Avatar 2">
+            <img src="assets/avatar3.png" alt="Avatar 3">
+            <img src="assets/avatar4.png" alt="Avatar 4">
+            <img src="assets/avatar5.png" alt="Avatar 5">
+          </div> -->
+      <!-- <p class="warnings">5 Avertissement</p> -->
+      <!-- </div> -->
+    </div>
+</div>
+</div>

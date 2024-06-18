@@ -1,0 +1,40 @@
+<div class="task-board">
+  <h2>Acces a Base donnée</h2>
+  <div class="breadcrumbs">
+    <span>Dashboard</span> &gt; <span>Parcours</span> &gt; <span>Acces De Base donnée</span>
+  </div>
+  <div class="columns">
+    <div class="column">
+      <h3 class="learning">Learning</h3>
+      <app-task-card title="Slack Integration"
+        description="Add a field in the portal to let the user connect their Slack account." [tags]="['Development']"
+        dueDate="Tomorrow">
+      </app-task-card>
+      <app-task-card title="Copywriting of the app"
+        description="Composing words to provide people with decision-making clarity when interacting with a product."
+        [tags]="['UX Writing']" dueDate="Nov 30">
+      </app-task-card>
+    </div>
+    <div class="column">
+      <h3 class="doing">Doing</h3>
+      <app-task-card title="Dashboard Design" description="Designing the UI for the dashboard." [tags]="['UI Design']"
+        dueDate="">
+      </app-task-card>
+      <app-task-card title="Design System" description="Create a consistent look and feel both on web and mobile."
+        [tags]="['UI Design']" dueDate="">
+      </app-task-card>
+    </div>
+    <div class="column">
+      <h3>Ready for Review</h3>
+      <app-task-card title="Presentation"
+        description="Help businesses to clearly define their annual e-commerce digital strategy by creating a high-level plan."
+        [tags]="['Planning']" dueDate="">
+      </app-task-card>
+      <app-task-card title="Brainstorming" description="Research and plan for new ideas." [tags]="['Research']"
+        dueDate="">
+      </app-task-card>
+    </div>
+  </div>
+  <button class="new-parcours" routerLink="/add-step">New Step</button>
+</div>
+<router-outlet></router-outlet>

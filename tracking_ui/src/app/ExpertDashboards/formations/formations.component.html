@@ -1,0 +1,14 @@
+<div>
+    <h2>Expert Page:</h2>
+    <h2>Formations</h2>
+    <ul>
+      <li *ngFor="let formation of formations" (click)="viewSteps(formation.id)">
+        {{ formation.formationName }}
+      </li>
+    </ul>
+  
+    <h3>Add Formation</h3>
+    <input [(ngModel)]="newFormationName" placeholder="Formation Name">
+    <button (click)="addFormation()">Add</button>
+  </div>
+  

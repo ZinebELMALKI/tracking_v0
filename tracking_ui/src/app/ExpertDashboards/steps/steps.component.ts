@@ -21,11 +21,11 @@ export class StepsComponent implements OnInit {
       title: '',
       description: '',
       stepProcess: '',
-      startDate: new Date().toISOString().substring(0, 10), // Adjusting date format
-      endDate: new Date().toISOString().substring(0, 10),   // Adjusting date format
-      formation: {
+      duration:0,
+      parcours: {
         id: this.formationId,
-        formationName: ''
+        parcoursName: '',
+        parcoursDescription:''
       }
     };
   }
@@ -39,7 +39,7 @@ export class StepsComponent implements OnInit {
   }
 
   addStep(): void {
-    this.newStep.formation.id = this.formationId;
+    this.newStep.parcours.id = this.formationId;
     this.stepsService.saveStep(this.newStep).subscribe((step: Step) => {
       this.steps.push(step);
       this.newStep = {
@@ -47,11 +47,11 @@ export class StepsComponent implements OnInit {
         title: '',
         description: '',
         stepProcess: '',
-        startDate: new Date().toISOString().substring(0, 10),
-        endDate: new Date().toISOString().substring(0, 10),
-        formation: {
+        duration:0,
+        parcours: {
           id: this.formationId,
-          formationName: ''
+          parcoursName: '',
+          parcoursDescription:''
         }
       };
     });

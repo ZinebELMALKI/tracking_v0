@@ -14,6 +14,8 @@ public class  Doing {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String url;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "step_id", referencedColumnName = "id")
+    private Steps step;
 
 }

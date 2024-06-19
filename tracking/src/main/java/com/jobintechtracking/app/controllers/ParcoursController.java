@@ -15,7 +15,6 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class ParcoursController {
     private final ParcoursService parcoursService;
-    @Autowired
     public ParcoursController(ParcoursService parcoursService) {
         this.parcoursService = parcoursService;
     }

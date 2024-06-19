@@ -14,7 +14,6 @@ public class DoingController {
 
     private final DoingService doingService;
 
-    @Autowired
     public DoingController(DoingService doingService) {
         this.doingService = doingService;
     }

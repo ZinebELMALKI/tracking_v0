@@ -14,7 +14,6 @@ public class LearningController {
 
     private final LearningService learningService;
 
-    @Autowired
     public LearningController(LearningService learningService) {
         this.learningService = learningService;
     }

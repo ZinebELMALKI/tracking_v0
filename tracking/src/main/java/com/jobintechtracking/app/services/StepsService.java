@@ -37,4 +37,8 @@ public class StepsService {
     public void deleteStep(Long id) {
         stepRepository.deleteById(id);
     }
+
+    public List<Steps> findByParcoursId(Long parcoursId) {
+        return stepRepository.findByParcoursId(parcoursId);
+    }
 }

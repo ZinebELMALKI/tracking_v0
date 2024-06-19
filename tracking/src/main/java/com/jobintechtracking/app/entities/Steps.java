@@ -18,20 +18,12 @@ public class Steps {
     private String title;
     private String description;
 
-    private Number duration ;
+    private Integer duration ;
 
 
     @ManyToOne
     @JoinColumn(name = "parcours_id")
     private Parcours parcours;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "doing_id", referencedColumnName = "id")
-    private Doing doing;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "learning_id", referencedColumnName = "id")
-    private Learning learning;
 
     @Enumerated(EnumType.STRING)
     private StepProcess stepProcess;

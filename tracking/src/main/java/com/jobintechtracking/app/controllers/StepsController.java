@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/steps")
-@CrossOrigin(origins = "http://localhost:4200")
 public class StepsController {
 
     private final StepsService stepsService;
@@ -37,7 +36,13 @@ public class StepsController {
         }
     }
 
-    @GetMapping
+    @GetMapping("parcours/{id}")
+    public ResponseEntity<List<Steps>> findByParcoursId(@PathVariable Long id) {
+        List<Steps> steps = stepsService.findByParcoursId(id);
+            return ResponseEntity.ok(steps);
+
+    }
+
     public ResponseEntity<List<Steps>> getAllSteps() {
         List<Steps> steps = stepsService.findAll();
         return ResponseEntity.ok(steps);

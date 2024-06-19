@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/steps")
+@CrossOrigin(origins = "http://localhost:4200")
 public class StepsController {
 
     private final StepsService stepsService;
@@ -51,7 +52,7 @@ public class StepsController {
     public void deleteSteps(@PathVariable Long id) {
         stepsService.deleteStep(id);
     }
-    
+
     @GetMapping("/parcours/{parcoursId}")
     public ResponseEntity<List<Steps>> getStepsByParcoursId(@PathVariable Long parcoursId) {
         List<Steps> steps = stepsService.findByParcoursId(parcoursId);

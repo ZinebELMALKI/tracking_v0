@@ -10,6 +10,10 @@ export interface Step {
   title: string;
   description: string;
   duration: number;
-  parcours: Parcours;
-  stepProcess:string;
+  parcours: {
+    id: number;
+    parcoursName: string;
+    parcoursDescription: string;
+  };
+  stepProcess: string;
 }

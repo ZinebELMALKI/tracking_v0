@@ -8,7 +8,7 @@ import { Step } from '../../models/step';
 })
 export class StepsService {
 
-  private apiUrl = 'http://localhost:8080/steps';
+  private apiUrl = 'http://localhost:8090/steps';
 
   constructor(private http: HttpClient) { }
 
@@ -21,6 +21,6 @@ export class StepsService {
   }
 
   getStepsByParcoursId(parcoursId: number): Observable<Step[]> {
-    return this.http.get<Step[]>(`${this.apiUrl}/parcours/${parcoursId}`);
+    return this.http.get<Step[]>(`${this.apiUrl}/${parcoursId}`);
 }
 }

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './ExpertDashboards/layouts/sidebar/sidebar.component';
 import { HeaderComponent } from './ExpertDashboards/layouts/header/header.component';
@@ -15,6 +15,7 @@ import { ParcoursProgressComponent } from './StudentDashboards/parcours-progress
 import { StudentProfileComponent } from './StudentDashboards/student-profile/student-profile.component';
 import { ParcoursComponent } from './ExpertDashboards/parcours/parcours.component';
 import { CommonModule } from '@angular/common';
+import { StepsComponent } from './ExpertDashboards/steps-card/steps.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CommonModule } from '@angular/common';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

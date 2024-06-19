@@ -16,11 +16,8 @@
             <div class="p-6">
                 <h3 class="text-xl font-semibold text-gray-800 mb-3">{{ parcours.parcoursName }}</h3>
                 <p class="text-gray-600 mb-6">{{ parcours.parcoursDescription }}</p>
-<<<<<<< HEAD
-                <a href="#"
-=======
-                <a [routerLink]="['/steps', parcours.id]"
->>>>>>> b64c750c802fbff69e0054b39b92caca0091bd31
+
+                <a [routerLink]="['/steps/parcours/', parcours.id]"
                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300">
                     Lire la suite
                     <svg class="w-4 h-4 ml-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"

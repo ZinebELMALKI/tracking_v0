@@ -14,9 +14,8 @@ export class ParcoursComponent implements OnInit {
   constructor(private parcoursService: ParcoursService) { }
 
   ngOnInit(): void {
-    console.log(this.parcoursList)
     this.loadParcours();
-    console.log(this.parcoursList)
+
 
   }
 

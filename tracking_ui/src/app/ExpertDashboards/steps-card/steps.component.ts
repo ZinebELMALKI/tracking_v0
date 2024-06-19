@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router'; 
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Step } from '../../models/step';
 import { StepsService } from '../../services/steps/steps.service';
 
@@ -13,23 +13,24 @@ export class StepsComponent implements OnInit {
   parcoursId!: number;
 
   constructor(
-    private route: ActivatedRoute, 
-    private router: Router, 
+    private route: ActivatedRoute,
+    private router: Router,
     private stepsService: StepsService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.parcoursId = +params['parcoursId']; 
+      this.parcoursId = +params['parcoursId'];
       this.loadSteps(this.parcoursId);
+      console.log("array1", this.stepsList);
     });
   }
 
   loadSteps(parcoursId: number): void {
     this.stepsService.getStepsByParcoursId(parcoursId).subscribe(
-      (steps) => {
-        this.stepsList = steps;
-        console.log(steps);
+      (stepData) => {
+        this.stepsList = stepData;
+        console.log(this.stepsList);
       },
       (error) => {
         console.error('Error fetching steps', error);
@@ -38,6 +39,6 @@ export class StepsComponent implements OnInit {
   }
 
   navigateToTask(): void {
-    this.router.navigate(['/task']); 
+    this.router.navigate(['/task']);
   }
 }

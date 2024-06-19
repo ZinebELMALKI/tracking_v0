@@ -12,5 +12,7 @@ export interface Step {
   description: string;
   duration: number;
   parcours: Parcours;
-  stepProcess:string;
+  stepProcess: string;
 }
+
+

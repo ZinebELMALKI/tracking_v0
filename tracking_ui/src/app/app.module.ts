@@ -1,5 +1,11 @@
+
+// import { MatAutocompleteModule } from '@angular/material/autocomplete';
+// import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +22,8 @@ import { StudentProfileComponent } from './StudentDashboards/student-profile/stu
 import { ParcoursComponent } from './ExpertDashboards/parcours/parcours.component';
 import { CommonModule } from '@angular/common';
 import { StepsComponent } from './ExpertDashboards/steps-card/steps.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +37,7 @@ import { StepsComponent } from './ExpertDashboards/steps-card/steps.component';
     AddStepComponent,
     ParcoursProgressComponent,
     StudentProfileComponent,
-    ParcoursComponent
+    ParcoursComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,9 +45,12 @@ import { StepsComponent } from './ExpertDashboards/steps-card/steps.component';
     HttpClientModule,
     FormsModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

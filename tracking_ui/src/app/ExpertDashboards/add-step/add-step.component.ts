@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { StepsService } from '../../services/steps/steps.service';
 import { Step } from '../../models/step';
+import { Parcours } from '../../models/parcours';
+import { Observable, map, startWith } from 'rxjs';
+import { ParcoursService } from '../../services/parcours/parcours.service';
+import { Learning } from '../../models/learning';
 
 @Component({
   selector: 'app-add-step',
@@ -10,32 +14,68 @@ import { Step } from '../../models/step';
 })
 export class AddStepComponent implements OnInit {
   stepForm!: FormGroup;
+  learningForm!: FormGroup;
+  parcoursCtrl = new FormControl();
+  filteredParcours!: Observable<Parcours[]>;
+  allParcours: Parcours[] = [];
+  par!: String;
+  step!: Step;
+  
 
-  constructor(private fb: FormBuilder, private stepsService: StepsService) {
+  constructor(private fb: FormBuilder, private stepsService: StepsService, private parcoursService: ParcoursService) {
     this.stepForm = this.fb.group({
-      title: '',
-      description: '',
-      duration: 0,
-      parcours: this.fb.group({
-        id: 1,
-        parcoursName: '',
-        parcoursDescription: ''
-      }),
-      stepProcess: ''
+      title: [''],
+      description: [''],
+      duration: [''],
+      parcours: [''],
+      stepProcess: ['']
     });
+    
 
   }
 
   ngOnInit(): void {
+    this.loadParcours();
+    this.filteredParcours = this.parcoursCtrl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterParcours(value))
+    );
+
 
   }
 
+  private _filterParcours(value: string): Parcours[] {
+    const filterValue = value.toLowerCase();
+    return this.allParcours.filter(parcours => parcours.parcoursName.toLowerCase().includes(filterValue));
+  }
+
+  loadParcours() {
+    this.parcoursService.getAllParcours().subscribe(
+      data => {
+        this.allParcours = data;
+      },
+      error => {
+        console.error('Erreur lors du chargement des parcours: ', error);
+      }
+    );
+  }
+
+
+  onParcoursSelected(parcours: Parcours) {
+    this.par = parcours.parcoursName;
+    this.step.parcours = parcours;
+    this.parcoursCtrl.setValue(parcours.parcoursName, { emitEvent: false });
+  }
+
+
   saveStep(): void {
     if (this.stepForm.valid) {
-      const step: Step = this.stepForm.value;
-      this.stepsService.saveStep(step).subscribe({
+      this.step = this.stepForm.value;
+      console.log(this.step)
+      this.stepsService.saveStep(this.step).subscribe({
         next: (response) => {
           console.log('Step saved:', response);
+          alert("Step saved")
         },
         error: (err) => {
           console.error('Error saving step:', err);
@@ -43,8 +83,9 @@ export class AddStepComponent implements OnInit {
         }
       })
     }
-
   }
+
+  
 
 
 }

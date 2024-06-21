@@ -17,7 +17,6 @@ export class AddStepComponent implements OnInit {
       description: '',
       duration: 0,
       parcours: this.fb.group({
-        id: 1,
         parcoursName: '',
         parcoursDescription: ''
       }),

@@ -5,7 +5,7 @@ import { Step } from '../../models/step';
 import { Parcours } from '../../models/parcours';
 import { Observable, map, startWith } from 'rxjs';
 import { ParcoursService } from '../../services/parcours/parcours.service';
-import { Learning } from '../../models/learning';
+
 
 @Component({
   selector: 'app-add-step',
@@ -14,13 +14,12 @@ import { Learning } from '../../models/learning';
 })
 export class AddStepComponent implements OnInit {
   stepForm!: FormGroup;
-  learningForm!: FormGroup;
   parcoursCtrl = new FormControl();
   filteredParcours!: Observable<Parcours[]>;
   allParcours: Parcours[] = [];
   par!: String;
   step!: Step;
-  
+
 
   constructor(private fb: FormBuilder, private stepsService: StepsService, private parcoursService: ParcoursService) {
     this.stepForm = this.fb.group({
@@ -30,8 +29,8 @@ export class AddStepComponent implements OnInit {
       parcours: [''],
       stepProcess: ['']
     });
-    
 
+    
   }
 
   ngOnInit(): void {
@@ -84,6 +83,7 @@ export class AddStepComponent implements OnInit {
       })
     }
   }
+
 
   
 

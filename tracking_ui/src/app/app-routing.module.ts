@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'steps/parcours/:parcoursId', component: StepsComponent },
   { path: 'task', component: TaskBoardComponent },
   { path: 'add-category', component: AddCategoryComponent },
-  { path: 'edit-step', component: EditStepComponent },
+  { path: 'edit-step/:stepId', component: EditStepComponent },
   { path: 'add-step', component: AddStepComponent },
   { path: 'parcours-progress', component: ParcoursProgressComponent },
   { path: 'student-profile', component: StudentProfileComponent },

@@ -36,5 +36,7 @@ public class LearningService {
     }
 
 
-
+    public Learning Updatelearning(Learning learning) {
+        return learningRepository.save(learning);
+    }
 }

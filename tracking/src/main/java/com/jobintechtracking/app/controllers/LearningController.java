@@ -1,6 +1,7 @@
 package com.jobintechtracking.app.controllers;
 
 import com.jobintechtracking.app.entities.Learning;
+import com.jobintechtracking.app.entities.Steps;
 import com.jobintechtracking.app.services.LearningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/learnings")
+@CrossOrigin(origins = "http://localhost:4200")
 public class LearningController {
 
     private final LearningService learningService;
@@ -23,6 +25,11 @@ public class LearningController {
         Learning savedLearning = learningService.save(learning);
         return ResponseEntity.ok(savedLearning);
     }
+    @PutMapping("/{id}")
+    public Learning updateLearning(@PathVariable Long id, @RequestBody Learning learning) {
+        return learningService.Updatelearning(learning);
+    }
+
 
     @PutMapping
     public ResponseEntity<Learning> updateLearning(@RequestBody Learning learning) {

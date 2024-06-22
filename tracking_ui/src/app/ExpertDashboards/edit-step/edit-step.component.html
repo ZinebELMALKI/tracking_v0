@@ -9,16 +9,18 @@
 </head>
 
 <body class="bg-gray-100 font-sans">
-    <div class="min-h-screen flex flex-col">
+    <div *ngIf="isLoading" class="loading-indicator">
+        Loading...
+      </div>
+    <div *ngIf="!isLoading && step" class="min-h-screen flex flex-col">
         <!-- Header -->
         <div class="flex justify-between items-center bg-white p-4 shadow rounded">
-            <h1 class="text-2xl font-bold">Edit Parcours: Acces De Base donnée</h1>
+            <h1 class="text-2xl font-bold">Edit Parcours: {{ step.title }}</h1>
             <div class="flex items-center space-x-4">
                 <button class="bg-gray-200 p-2 rounded"><i class="fas fa-share"></i></button>
                 <button class="bg-gray-200 p-2 rounded"><i class="fas fa-save"></i></button>
             </div>
         </div>
-
         <!-- Main Content -->
         <div class="flex flex-grow p-6">
             <div class="flex flex-col w-full space-y-6">
@@ -26,123 +28,104 @@
                 <!-- Content -->
                 <div class="flex space-x-6">
         <!-- Main Section -->
-        <div class="flex flex-col w-3/4 space-y-6">
+        <div  class="flex flex-col w-3/4 space-y-6">
             <!-- Image, Title and Description -->
+         
             <div class="bg-white p-4 shadow rounded">
                 <img src="assets/videotask.png" alt="Preview" class="w-full rounded shadow mb-4">
-                <h2 class="text-xl font-bold">Title: Creating Awesome Travel Website</h2>
-                <p class="text-gray-600">200 students involved | 15 Days</p>
+                <div class="flex">
+                         <img src="assets/edit-icon.png" alt="Edit" class="edit-icon top-4 right-4 cursor-pointer"
+                         (click)="startEditing('title')">
+                         <h2 class="text-lg font-bold mb-2">Title</h2>
+                        </div>
+                        <h3 class="text-gray-700" *ngIf="!editingField || editingField !== 'title'">{{ step?.title }}</h3>
+                <input type="text" class="text-xl font-bold bg-transparent border-b-2 border-gray-300"
+                       *ngIf="editingField === 'title'" [value]="step?.title"
+                       (keydown.enter)="updateField($event)" (blur)="updateField($event)">
             </div>
+            
+            
+            
                         <!-- Description -->
                         <div class="bg-white p-4 shadow rounded">
-                            <h3 class="text-lg font-bold mb-2">Description</h3>
-                            <p class="text-gray-700">Follow this video tutorial below...</p>
-                        </div>
+                            <div class="flex mr-16">
+                              <img src="assets/edit-icon.png" alt="Edit" class="edit-icon top-4 right-4 cursor-pointer"
+                                   (click)="startEditing('description')">
+                              <h3 class="text-lg font-bold mb-2">Description</h3>
+                            </div>
+                            <p class="text-gray-700" *ngIf="!editingField || editingField !== 'description'">{{ step.description }}</p>
+                            <textarea class="text-gray-700 bg-transparent border border-gray-300 p-2 rounded"
+                                      *ngIf="editingField === 'description'" [(ngModel)]="step.description"
+                                      (keydown.enter)="updateField($event)" (blur)="updateField($event)"></textarea>
+                          </div>
+    <!-- duration -->
+ 
+        <!-- Duration -->
+        <div class="bg-white p-4 shadow rounded">
+            <div class="flex ">
+                <img src="assets/edit-icon.png" alt="Edit" class="edit-icon cursor-pointer" 
+                (click)="startEditing('duration')">
+             <label class="block text-gray-700 font-bold mb-2" for="duration">Duration</label>
+         </div>
+         <div class="relative">
+             <p  *ngIf="!editingField || editingField !== 'duration'" class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                 {{ step.duration }}
+             </p>
+             <input type="text"  *ngIf="editingField === 'duration'" [value]="step.duration" (keydown.enter)="updateField($event)" (blur)="updateField($event)" class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+         </div>
+
 
                         <!-- Parts -->
                         <div class="bg-white p-4 shadow rounded">
-                            <h3 class="text-lg font-bold mb-2">Part 1: Learning</h3>
-                            <ul class="list-disc pl-6 text-gray-700">
-                                <li>Understanding the basics of Figma</li>
-                                <li>Designing a mobile application using Figma</li>
-                                <li>Researching the design process</li>
-                            </ul>
+                            <!-- Learning Part -->
+                            <div class="flex items-center">
+                                <h3 class="text-lg font-bold mb-2">Part 1: Learning</h3>
+                            </div>
+                        
+                            <!-- Title -->
+                            <div class="flex items-center">
+                                <h3 class="text-gray-700 font-bold mr-2">Title:</h3>
+                                <img src="assets/edit-icon.png" alt="Edit" class="edit-icon cursor-pointer" (click)="startEditing('learningTitle')">
+                            </div>
+                            <p *ngIf="!editingField || editingField !== 'learningTitle'" class="text-gray-700">{{ learning?.title }}</p>
+                            <input *ngIf="editingField === 'learningTitle'" type="text" class="text-gray-700 bg-transparent border border-gray-300 p-2 w-full" [(ngModel)]="learning!.title" (keydown.enter)="updateField($event)" (blur)="updateField($event)">
+                        
+                            <!-- Description -->
+                            <div class="flex items-center mt-4">
+                                <h3 class="text-gray-700 font-bold mr-2">Description:</h3>
+                                <img src="assets/edit-icon.png" alt="Edit" class="edit-icon cursor-pointer" (click)="startEditing('learningDescription')">
+                            </div>
+                            <p *ngIf="!editingField || editingField !== 'learningDescription'" class="text-gray-700">{{ learning?.description }}</p>
+                            <textarea *ngIf="editingField === 'learningDescription'" class="text-gray-700 bg-transparent border border-gray-300 p-2 w-full" [(ngModel)]="learning!.description" (keydown.enter)="updateField($event)" (blur)="updateField($event)"></textarea>
+                        
+                            <!-- URL -->
+                            <div class="flex items-center mt-4">
+                                <h3 class="text-gray-700 font-bold mr-2">Url:</h3>
+                                <img src="assets/edit-icon.png" alt="Edit" class="edit-icon cursor-pointer" (click)="startEditing('learningUrl')">
+                            </div>
+                            <p *ngIf="!editingField || editingField !== 'learningUrl'" class="text-gray-700">{{ learning?.url }}</p>
+                            <input *ngIf="editingField === 'learningUrl'" type="text" class="text-gray-700 bg-transparent border border-gray-300 p-2 w-full" [(ngModel)]="learning!.url" (keydown.enter)="updateField($event)" (blur)="updateField($event)">
                         </div>
+                        
 
                         <div class="bg-white p-4 shadow rounded">
-                            <h3 class="text-lg font-bold mb-2">Part 2: Doing</h3>
+                            <div class="flex">
+                                <img src="assets/edit-icon.png" alt="Edit" class="edit-icon top-4 right-4"
+                                (click)="startEditing('doingUrl')">
+                                <h3 class="text-lg font-bold mb-2">Part 2: Doing</h3>
+                            </div>
                             <ul class="list-disc pl-6 text-gray-700">
-                                <li>Understanding the tools in Figma</li>
-                                <li>Designing a mobile application using Figma</li>
-                                <li>Creating the design process</li>
+                                <h3 class="text-gray-700">Documentation:{{doing?.url}}</h3>
+                                <input type="text" class="text-gray-700 bg-transparent border border-gray-300 p-2"
+                                *ngIf="editingField === 'doingUrl'" [value]="doing?.url"
+                                (keydown.enter)="updateField($event)" (blur)="updateField($event)">
                             </ul>
                         </div>
                     </div>
 
-                    <!-- Sidebar Section -->
-                    <div class="w-1/4 flex flex-col space-y-6">
-                           <!-- Duration Dropdown -->
-        <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2" for="duration">Duration</label>
-            <div class="relative">
-                <select id="duration" class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                    <option>15 Days</option>
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.516 7.547l4.484 4.573 4.484-4.573h-8.968z"/></svg>
-                </div>
-            </div>
-        </div>
+                
 
-        <!-- Categories Dropdown -->
-        <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2" for="categories">Categories</label>
-            <div class="relative">
-                <select id="categories" class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                    <option>Web Design</option>
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.516 7.547l4.484 4.573 4.484-4.573h-8.968z"/></svg>
-                </div>
-            </div>
-        </div>
-
-        <!-- Number of Steps Dropdown -->
-        <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2" for="steps">Number of Steps</label>
-            <div class="relative">
-                <select id="steps" class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                    <option>3 Steps</option>
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.516 7.547l4.484 4.573 4.484-4.573h-8.968z"/></svg>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tools Input -->
-        <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2" for="tools">Tools</label>
-            <input id="tools" class="block w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="GitLab">
-        </div>
-
-
-                    <!-- Parcours Status -->
-        <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2">Parcours Status</label>
-            <div class="flex items-center mb-2">
-                <input id="active" name="status" type="radio" class="form-radio text-blue-600" checked>
-                <label for="active" class="ml-2 text-gray-700">Active</label>
-            </div>
-            <div class="flex items-center mb-2">
-                <input id="on-hold" name="status" type="radio" class="form-radio text-yellow-600">
-                <label for="on-hold" class="ml-2 text-gray-700">On Hold</label>
-            </div>
-            <div class="flex items-center">
-                <input id="close" name="status" type="radio" class="form-radio text-red-600">
-                <label for="close" class="ml-2 text-gray-700">Close</label>
-            </div>
-        </div>
-
-        <!-- Files Task -->
-        <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2" for="file-task">Files Task</label>
-            <p class="text-gray-600 mb-2">Last Modified: 12 Feb 2024</p>
-            <div class="border border-dashed border-gray-300 py-8 px-4 rounded">
-                <div class="flex items-center justify-center">
-                    <label class="cursor-pointer">
-                        <span class="bg-white py-2 px-4 rounded-full text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white">Browse Files</span>
-                        <input type="file" class="hidden">
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <!-- Save Changes Button -->
-        <div class="mb-4">
-            <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 w-full">Save Changes</button>
-        </div>
-                    </div>
+         </div>
                 </div>
             </div>
         </div>

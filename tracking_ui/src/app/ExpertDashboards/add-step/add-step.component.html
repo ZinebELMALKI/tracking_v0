@@ -44,26 +44,8 @@
                 </nav>
                 <h1 class="text-2xl font-semibold mt-6" style="color: #7B68EE;">Add New Step</h1>
             </div>
-            <!-- à revenir -->
-            <!-- <div class="flex space-x-2">
-            <button
-                class="flex items-center px-2 py-0.5 border rounded-lg text-gray-500 border-gray-300 hover:bg-gray-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="none"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9.049 2.927a1 1 0 011.902 0l1.398 4.3a1 1 0 00.95.69h4.516a1 1 0 01.591 1.806l-3.702 2.684a1 1 0 00-.364 1.118l1.398 4.3a1 1 0 01-1.451 1.118L10 15.342l-3.702 2.684a1 1 0 01-1.451-1.118l1.398-4.3a1 1 0 00-.364-1.118L2.179 9.723a1 1 0 01.591-1.806h4.516a1 1 0 00.95-.69l1.398-4.3z" />
-                </svg>
-            </button>
-            <button
-                class="flex items-center px-4 py-2 border rounded-lg text-gray-500 border-gray-300 hover:bg-gray-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
-                </svg>
-                Share
-            </button>
-        </div> -->
+
+
         </div>
 
         <div class="bg-gray-50 text-gray-900 flex grid grid-cols-3 gap-4 gap-8 mt-8">
@@ -101,20 +83,21 @@
                     <div class="bg-white p-4 shadow rounded">
                         <h3 class="text-lg font-bold mb-2">Part 1: Learning</h3>
                         <div class="mb-4">
-                            <label for="learning_title" class="block text-sm font-medium text-gray-700 ">Title</label>
-                            <input type="text" id="title"
+                            <label for="learningTitle" class="block text-sm font-medium text-gray-700 ">Title</label>
+                            <input type="text" id="learningTitle"
                                 class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 placeholder="Learning Title">
                         </div>
                         <div class="mb-4">
-                            <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                            <textarea id="description" rows="5"
+                            <label for="learningDescription"
+                                class="block text-sm font-medium text-gray-700">Description</label>
+                            <textarea id="learningDescription" rows="5"
                                 class=" mb-12 mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-color focus:border-primary-color sm:text-sm"
                                 placeholder="Enter your description here"></textarea>
                         </div>
                         <div class="mb-4">
-                            <label for="url" class="block text-sm font-medium text-gray-700 ">Url</label>
-                            <input type="text" id="title"
+                            <label for="learningUrl" class="block text-sm font-medium text-gray-700 ">Url</label>
+                            <input type="text" id="learningUrl"
                                 class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 placeholder="Url vidéo">
                         </div>
@@ -141,21 +124,30 @@
                     <div class="bg-white p-8 rounded-lg shadow-lg h-screen">
                         <div class="mb-4">
                             <label for="duration" class="block text-sm font-medium text-gray-700">Duration</label>
-                            <select formControlName="duration"
+                            <input type="text" list="durationOptions" formControlName="duration" placeholder="Hour"
                                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-primary-color focus:border-primary-color sm:text-sm">
-                                <option>15 Days</option>
-                                <option>30 Days</option>
-                                <option>45 Days</option>
-                            </select>
+
+                            <datalist id="durationOptions">
+                                <option value=15>
+                                <option value=30>
+                                <option value=45>
+                            </datalist>
                         </div>
                         <div class="mb-6">
                             <label for="parcours" class="block text-sm font-medium text-gray-700">Parcours</label>
-                            <select formControlName="parcours"
-                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-primary-color focus:border-primary-color sm:text-sm">
-                                <option>Web Design</option>
-                                <option>Graphic Design</option>
-                                <option>Software Development</option>
-                            </select>
+                            <div class="mt-4 w-full">
+                                <input type="text" placeholder="Choose a course" [(ngModel)]="par"
+                                    class="border border-gray-300 rounded-lg py-2 px-4 block w-full placeholder-gray-400 focus:outline-none focus:border-blue-500"
+                                    [formControl]="parcoursCtrl">
+                                <div *ngIf="(filteredParcours | async) as parcoursList"
+                                    class="mt-1 w-1/5 absolute bg-white  rounded-lg shadow-lg ">
+                                    <div *ngFor="let parcours of parcoursList" (click)="onParcoursSelected(parcours)"
+                                        class="py-2 px-4 cursor-pointer hover:bg-gray-100">
+                                        {{ parcours.parcoursName }}
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="mb-6">
@@ -163,7 +155,7 @@
                                 Process</label>
                             <input type="text" formControlName="stepProcess"
                                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-primary-color focus:border-primary-color sm:text-sm"
-                                placeholder="Type base link here...">
+                                placeholder="Type here ON/OFF">
                         </div>
                         <div class="mb-6">
                             <label class="block text-sm font-medium text-gray-700">Files Task</label>

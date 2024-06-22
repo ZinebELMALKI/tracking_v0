@@ -3,26 +3,30 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { StepsService } from '../../services/steps/steps.service';
 import { Step } from '../../models/step';
 import { Parcours } from '../../models/parcours';
-import { Observable, map, startWith } from 'rxjs';
+import { Observable, of, startWith } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ParcoursService } from '../../services/parcours/parcours.service';
-import { Learning } from '../../models/learning';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-step',
   templateUrl: './add-step.component.html',
-  styleUrl: './add-step.component.css'
+  styleUrls: ['./add-step.component.css']
 })
 export class AddStepComponent implements OnInit {
   stepForm!: FormGroup;
-  learningForm!: FormGroup;
   parcoursCtrl = new FormControl();
   filteredParcours!: Observable<Parcours[]>;
   allParcours: Parcours[] = [];
-  par!: String;
+  par!: string;
   step!: Step;
-  
 
-  constructor(private fb: FormBuilder, private stepsService: StepsService, private parcoursService: ParcoursService) {
+  constructor(
+    private fb: FormBuilder,
+    private stepsService: StepsService,
+    private parcoursService: ParcoursService,
+    private router: Router
+  ) {
     this.stepForm = this.fb.group({
       title: [''],
       description: [''],
@@ -30,18 +34,26 @@ export class AddStepComponent implements OnInit {
       parcours: [''],
       stepProcess: ['']
     });
-    
-
   }
 
   ngOnInit(): void {
+    this.step = {
+      id: 1,
+      title: '',
+      description: '',
+      duration: 0,
+      parcours: {
+        id: 1,
+        parcoursName: '',
+        parcoursDescription: '',
+      },
+      stepProcess: ''
+    };
     this.loadParcours();
     this.filteredParcours = this.parcoursCtrl.valueChanges.pipe(
       startWith(''),
       map(value => this._filterParcours(value))
     );
-
-
   }
 
   private _filterParcours(value: string): Parcours[] {
@@ -60,32 +72,26 @@ export class AddStepComponent implements OnInit {
     );
   }
 
-
   onParcoursSelected(parcours: Parcours) {
     this.par = parcours.parcoursName;
     this.step.parcours = parcours;
     this.parcoursCtrl.setValue(parcours.parcoursName, { emitEvent: false });
   }
 
-
   saveStep(): void {
     if (this.stepForm.valid) {
       this.step = this.stepForm.value;
-      console.log(this.step)
+      this.step.parcours = this.allParcours.find(p => p.parcoursName === this.par) || this.step.parcours;
+      console.log(this.step);
       this.stepsService.saveStep(this.step).subscribe({
         next: (response) => {
           console.log('Step saved:', response);
-          alert("Step saved")
+          this.router.navigate(['/add-learning'], { state: { step: this.step } });
         },
         error: (err) => {
           console.error('Error saving step:', err);
-
         }
-      })
+      });
     }
   }
-
-  
-
-
 }

@@ -19,7 +19,7 @@ public class DoingController {
         this.doingService = doingService;
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Doing> saveDoing(@RequestBody Doing doing) {
         Doing savedDoing = doingService.save(doing);
         return ResponseEntity.ok(savedDoing);

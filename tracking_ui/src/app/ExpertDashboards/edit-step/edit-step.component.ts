@@ -64,6 +64,12 @@ export class EditStepComponent implements OnInit {
          this.learning?.description === newValue;
       }else if(this.editingField === 'learningUrl'){
         this.learning?.url === newValue;
+      }else if (this.editingField === 'doingTitle'){
+        this.learning!.title = newValue;
+      }else if(this.editingField === 'doingDescription'){
+         this.learning?.description === newValue;
+      }else if(this.editingField === 'doingUrl'){
+        this.learning?.url === newValue;
       }
     
 

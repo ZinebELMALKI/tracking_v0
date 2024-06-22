@@ -20,7 +20,7 @@ public class LearningController {
         this.learningService = learningService;
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Learning> saveLearning(@RequestBody Learning learning) {
         Learning savedLearning = learningService.save(learning);
         return ResponseEntity.ok(savedLearning);

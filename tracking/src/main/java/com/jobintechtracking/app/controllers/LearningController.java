@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/learnings")
+@CrossOrigin(origins = "http://localhost:4200")
 public class LearningController {
 
     private final LearningService learningService;
@@ -18,7 +19,7 @@ public class LearningController {
         this.learningService = learningService;
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Learning> saveLearning(@RequestBody Learning learning) {
         Learning savedLearning = learningService.save(learning);
         return ResponseEntity.ok(savedLearning);

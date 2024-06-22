@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/doings")
+@CrossOrigin(origins = "http://localhost:4200")
 public class DoingController {
 
     private final DoingService doingService;
@@ -18,7 +19,7 @@ public class DoingController {
         this.doingService = doingService;
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Doing> saveDoing(@RequestBody Doing doing) {
         Doing savedDoing = doingService.save(doing);
         return ResponseEntity.ok(savedDoing);

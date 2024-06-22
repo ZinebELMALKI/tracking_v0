@@ -23,6 +23,8 @@ import { ParcoursComponent } from './ExpertDashboards/parcours/parcours.componen
 import { CommonModule } from '@angular/common';
 import { StepsComponent } from './ExpertDashboards/steps-card/steps.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AddLearningComponent } from './ExpertDashboards/add-learning/add-learning.component';
+import { AddDoingComponent } from './ExpertDashboards/add-doing/add-doing.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     ParcoursProgressComponent,
     StudentProfileComponent,
     ParcoursComponent,
+    AddLearningComponent,
+    AddDoingComponent,
   ],
   imports: [
     BrowserModule,

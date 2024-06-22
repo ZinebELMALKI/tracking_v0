@@ -13,6 +13,8 @@ public class  Doing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String title;
+    private String description;
     private String url;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "step_id", referencedColumnName = "id")

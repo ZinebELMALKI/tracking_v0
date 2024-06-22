@@ -8,6 +8,8 @@ import { ParcoursProgressComponent } from './StudentDashboards/parcours-progress
 import { StudentProfileComponent } from './StudentDashboards/student-profile/student-profile.component';
 import { ParcoursComponent } from './ExpertDashboards/parcours/parcours.component';
 import { StepsComponent } from './ExpertDashboards/steps-card/steps.component';
+import { AddLearningComponent } from './ExpertDashboards/add-learning/add-learning.component';
+import { AddDoingComponent } from './ExpertDashboards/add-doing/add-doing.component';
 
 const routes: Routes = [
 
@@ -18,6 +20,8 @@ const routes: Routes = [
   { path: 'add-category', component: AddCategoryComponent },
   { path: 'edit-step', component: EditStepComponent },
   { path: 'add-step', component: AddStepComponent },
+  { path: 'add-learning', component: AddLearningComponent },
+  { path: 'add-doing', component: AddDoingComponent },
   { path: 'parcours-progress', component: ParcoursProgressComponent },
   { path: 'student-profile', component: StudentProfileComponent },
   { path: '', redirectTo: '/add-step', pathMatch: 'full' }
